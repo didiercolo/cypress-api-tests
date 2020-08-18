@@ -18,4 +18,13 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+  
+  // Reference: https://www.mariedrake.com/post/api-testing-with-cypress
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    if (browser.name === 'chrome') {
+      launchOptions.args.push('--auto-open-devtools-for-tabs');
+      return launchOptions;
+    }
+  });
+
 }

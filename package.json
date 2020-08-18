@@ -4,7 +4,11 @@
   "description": "Let's have some API tests using Cypress.io",
   "main": "index.js",
   "scripts": {
-    "cy:open":"cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "server:run": "json-server --watch db.json",
+    "start:env": "concurrently \"npm run server:run\" \"npm run cy:open\"",
+    "test:api": "concurrently  --kill-others --success first \"npm run server:run\" \"npm run cy:run\""
   },
   "repository": {
     "type": "git",
@@ -18,7 +22,9 @@
   },
   "homepage": "https://github.com/didiercolo/cypress-api-tests#readme",
   "dependencies": {
-    "cypress": "^4.12.1"
+    "concurrently": "^5.3.0",
+    "cypress": "^4.12.1",
+    "json-server": "^0.16.1"
   },
   "devDependencies": {
     "@bahmutov/cy-api": "^1.4.2"
